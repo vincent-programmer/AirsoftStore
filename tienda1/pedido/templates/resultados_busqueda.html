@@ -1,0 +1,44 @@
+{% extends "pedido/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+<body>
+    <H2>
+        <strong>
+            <p>&emsp;&emsp;&emsp;Estas buscando:  &nbsp;{{query}}</p>
+            {% if articulos %}
+             
+            <p>&emsp;&emsp;&emsp;Articulos encontrados: {{articulos|length}} articulos
+                <table>
+                    <tr>
+                        <td><H2><strong>&emsp;&emsp;Nombre</strong></H2></td>
+                        <td><H2><strong>&emsp;Categoria</strong></H2></td>
+                        <td><H2><strong>&emsp;&emsp;Precio</strong></H2></td>
+                    </tr>
+
+
+                        {% for articulo in articulos %}
+                    <tr>
+                        <td><H2><strong>&emsp;&emsp;{{articulo.nombre}}</strong></H2></td> 
+                        <td><H2><strong>&emsp;{{articulo.categoria}}</strong></H2></td> 
+                        <td><H2><strong>&emsp;&emsp;${{articulo.precio}}</strong></H2></td>
+                        
+                    </tr>
+                        {% endfor %}
+
+
+
+                                                                             
+                    {% else %}
+                        <p>&emsp;&emsp;No se encontro ningun producto</p>
+                    {% endif %}
+                </table>            
+        </strong>
+    </H2>
+
+</body>
+
+{% endblock %}

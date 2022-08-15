@@ -1,0 +1,86 @@
+{% extends "pedido/base.html" %}
+
+{% load static %}
+
+{% block javascript %}
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script src="{% static 'pedido/js/confirmacion.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+
+  <!-- Heading -->
+  <body>
+    <H1>
+      <strong>
+        <p>&emsp;&emsp;&emsp;Ultimos productos publicados</p>
+      </H1> 
+    </body> 
+
+    
+                    {% for articulo in articulos %}
+                    <section class="page-section clearfix">
+                        <div class="container">
+                          <div class="intro">
+                            <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{{articulo.imagen.url}}" alt="" style="width: 30%;"> </td>
+                            <div class="intro-text left-0 text-left bg-faded p-5 rounded">
+                              <h2 class="section-heading mb-4" >
+
+                                <!--  <span class="section-heading-upper">{{articulo.autor}}</span>  -->
+                                <span class="section-heading-lower">{{articulo.nombre}}</span>
+                                <span class="section-heading-upper">${{articulo.precio}}</span>
+                                <span class="section-heading-upper"><a href="{% url 'detalle' articulo.id %}">Detalles</a></span>                              
+                              </h2>
+                            </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="page-section cta"><p></p></section>
+                        {% endfor %}
+
+                       
+
+  
+    <!-- Message -->
+
+    <section class="page-section cta">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-9 mx-auto">
+            <div class="cta-inner text-center rounded">
+              <h2 class="section-heading mb-4">
+                <span class="section-heading-upper"><h1>Categorias</h1></span>
+                {% load mptt_tags %}
+                <ul class="category-list">
+                  {% recursetree categorias %}
+                      <li class="dropdown side-dropdown">
+                        <a href="/category/{{ node.id }}" class="dropdown-toggle" {% if not node.is_leaf_node %} data-toggle="dropdown" aria-expanded="true" {% endif %}>{{ node.name }}</a>
+                        <div class="custom-menu">
+                          <div class="row">
+                            <div class="col-md-4">
+
+                              {% if not node.is_leaf_node %}
+                              <ul class="list-links">
+                                <hr>
+                                <li><a href="#">{{ children }}</a></li>
+
+                              </ul>
+                              {% endif %}    
+                              
+                              <hr class="hidden-md hidden-lg">
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                  {% endrecursetree %}
+              </ul>
+              </h2>
+              <p class="mb-0">.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {% endblock %}

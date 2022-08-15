@@ -1,0 +1,22 @@
+{% extends "pedido/base_post.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<head>
+    <title>
+        Modifica tu producto publicado
+    </title>
+</head>   
+
+
+<form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Modificar">
+    </form>
+    {{ mensaje }}
+{% endblock %}

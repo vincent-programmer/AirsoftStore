@@ -1,0 +1,59 @@
+{% extends "pedido/base.html" %}
+
+{% load static %}
+{% block javascript %}
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script src="{% static 'pedido/js/confirmacion.js' %}"></script>
+{% endblock %}
+{% block content %}
+
+<head>
+    <title>
+
+    </title>
+</head>    
+    <body>  
+        <H3>
+            <strong>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mis datos<p>
+                <p><p>    
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nombre: {{user.first_name}} {{user.last_name}} <p>                             
+            </strong>
+        </H3>
+
+        <H1>
+            <strong>
+                Mis productos publicados
+            </strong>
+        </H1>        
+        {% for articulo in articulos %}
+        <section class="page-section clearfix">
+            <div class="container">
+              <div class="intro">
+                <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{{articulo.imagen.url}}" alt="" style="width: 30%;"> </td>
+                <div class="intro-text left-0 text-left bg-faded p-5 rounded">
+                  <h2 class="section-heading mb-4" >
+
+                    <!--  <span class="section-heading-upper">{{articulo.autor}}</span>  -->
+                    <span class="section-heading-lower">{{articulo.nombre}}</span>
+                    <span class="section-heading-upper">${{articulo.precio}}</span>
+                    <p><p> 
+                    <span class="section-heading-upper"><a href="{% url 'detalle' articulo.id %}">Detalles</a></span>
+                    <p><p> 
+                    <span class="section-heading-upper"><a href="{% url 'modificar_producto' articulo.id %}">Modificar</a></span>
+                    <p><p> 
+                    <span class="section-heading-upper"><a href="{% url 'eliminar_producto' articulo.id %}">Eliminar</a></span>                              
+                  </h2>
+                </div>
+                </div>
+            </div>
+        </section>
+        <section class="page-section cta"><p></p></section>
+            {% endfor %}
+    
+    
+    
+    </body>
+    
+
+{% endblock %}
